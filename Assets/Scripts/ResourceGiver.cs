@@ -8,6 +8,7 @@ public class ResourceGiver : MonoBehaviour
     [SerializeField] private int PaymentResource;
     [SerializeField] private int cost;
     [SerializeField] private bool Unlocked;
+    private bool canGive;
     [SerializeField] ResourceManger ReM;
 
     public void Add_Resource()
@@ -24,5 +25,28 @@ public class ResourceGiver : MonoBehaviour
                 Unlocked = !Unlocked;
                 ReM.Resources[PaymentResource] -= cost;
         }    
+    }
+
+    void Update()
+    {
+        if(canGive && Input.GetKeyDown(KeyCode.E))
+        {
+            Add_Resource();
+        }
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Player"))
+        {          
+            canGive = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.CompareTag("Player"))
+        {          
+            canGive = false;
+        }
     }
 }
