@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class ResourceManger : MonoBehaviour
 {
-    public int[] Resources; //Wood:0, Stone:1
+public int[] Resources; //Wood:0, Stone:1
 }
