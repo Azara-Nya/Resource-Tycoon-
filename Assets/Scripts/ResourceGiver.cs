@@ -8,23 +8,17 @@ public class ResourceGiver : MonoBehaviour
     [SerializeField] private int PaymentResource;
     [SerializeField] private int cost;
     [SerializeField] private bool Unlocked;
+    [SerializeField] private float Resource_Time=1f;
     private bool canGive;
+    public bool currently_adding;
     [SerializeField] ResourceManger ReM;
 
     public void Add_Resource()
     {
-        if(Unlocked)
+        if(!currently_adding)
         {
-        //Wait Specific Amount of Time
-        ReM.Resources[Resource] += 1;
-        Debug.Log($"{ReM.Resources[Resource]}, {Resource}");
+        StartCoroutine(Resource_Adder());
         }
-
-        if(!Unlocked && ReM.Resources[PaymentResource] >= cost)
-        {
-                Unlocked = !Unlocked;
-                ReM.Resources[PaymentResource] -= cost;
-        }    
     }
 
     void Update()
@@ -32,7 +26,7 @@ public class ResourceGiver : MonoBehaviour
         if(canGive && Input.GetKeyDown(KeyCode.E))
         {
             Add_Resource();
-        }
+        } 
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -47,6 +41,32 @@ public class ResourceGiver : MonoBehaviour
         if(other.CompareTag("Player"))
         {          
             canGive = false;
+            currently_adding = false;
         }
+    }
+
+    IEnumerator Resource_Adder()
+    {
+        
+        {
+        if(Unlocked)
+        {
+            currently_adding = !currently_adding;
+        yield return new WaitForSeconds(Resource_Time);
+        if(canGive)
+        {
+        ReM.Resources[Resource] += 1;
+        Debug.Log($"{ReM.Resources[Resource]}, {Resource}");
+         currently_adding = !currently_adding;
+        }
+        }
+
+        if(!Unlocked && ReM.Resources[PaymentResource] >= cost)
+        {
+                Unlocked = !Unlocked;
+                ReM.Resources[PaymentResource] -= cost;
+        }    
+        }
+         
     }
 }
