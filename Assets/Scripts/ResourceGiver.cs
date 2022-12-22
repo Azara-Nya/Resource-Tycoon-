@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class ResourceGiver : MonoBehaviour
 {
-    [SerializeField] private int Resource; //Wood:0, Stone:1
-    [SerializeField] private int PaymentResource;
+    [SerializeField] private string Resource="Wood"; 
+    [SerializeField] private int Resource_Number=0;
+    [SerializeField] private string PaymentResource;
+    [SerializeField] private int PaymentResource_Number=0;
     [SerializeField] private int cost;
     [SerializeField] private bool Unlocked;
     [SerializeField] private float Resource_Time=1f;
     private bool canGive;
+    private int times;
     public bool currently_adding;
     [SerializeField] ResourceManger ReM;
+    [SerializeField] Inventory Inven;
 
     public void Add_Resource()
     {
@@ -53,20 +57,38 @@ public class ResourceGiver : MonoBehaviour
         {
             currently_adding = !currently_adding;
         yield return new WaitForSeconds(Resource_Time);
+
         if(canGive)
         {
-        ReM.Resources[Resource] += 1;
-        Debug.Log($"{ReM.Resources[Resource]}, {Resource}");
-         currently_adding = !currently_adding;
+            for(int i = 0; i < Inven.Inv.Length; i++)
+            {
+                if(Inven.Inv[i]=="Nothing")
+               {
+                   Inven.Inv[i] = Resource;
+                   ReM.Resources[Resource_Number] += 1;
+                    break;
+               }
+          }
+             currently_adding = !currently_adding;
         }
         }
 
-        if(!Unlocked && ReM.Resources[PaymentResource] >= cost)
+        if(!Unlocked && ReM.Resources[PaymentResource_Number] >= cost)
         {
                 Unlocked = !Unlocked;
-                ReM.Resources[PaymentResource] -= cost;
-        }    
+                ReM.Resources[PaymentResource_Number] -= cost;
+
+                for(int i = 0; i < Inven.Inv.Length; i++)
+                {         
+                    if(Inven.Inv[i] == PaymentResource && times != cost)
+                    {
+                        times++;
+                        Inven.Inv[i] = "Nothing";
+                        ReM.Resources[Resource_Number]-=1;
+                    }
+                }    
+                times=0;
         }
          
     }
-}
+}}

@@ -6,10 +6,18 @@ using TMPro;
 public class Inventory : MonoBehaviour
 {
 [SerializeField] private TextMeshProUGUI Text;
-[SerializeField] ResourceManger ReM;
+public string[] Inv;
 
     void Update()
     {
-        Text.text= $"Wood: {ReM.Resources[0]} \n Stone: {ReM.Resources[1]}";
+        for( int i=0; i<5; i++ ) 
+        {
+            if(Inv[i]=="")
+            {
+                Inv[i] = "Nothing";
+            }
+        }
+        
+        Text.text= $"Slot 1: {Inv[0]} \n Slot 2: {Inv[1]} \n Slot 3: {Inv[2]} \n Slot 4: {Inv[3]} \n Slot 5: {Inv[4]}";
     }
 }
