@@ -249,6 +249,7 @@ MonoBehaviour:
   cost: 2
   Unlocked: 0
   Resource_Time: 2
+  ResourcePrefab: {fileID: 5951397684372438148, guid: 5d918c8b50ca711418f936fe7d5d0afe, type: 3}
   currently_adding: 0
   ReM: {fileID: 570290576}
   Inven: {fileID: 594619495}
@@ -481,7 +482,7 @@ GameObject:
   - component: {fileID: 594619495}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: Inventory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -499,12 +500,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text: {fileID: 2059756659}
+  selectedSlot: 0
   Inv:
   - 
   - 
   - 
   - 
   - 
+  InvContent:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &594619496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -713,6 +721,7 @@ MonoBehaviour:
   cost: 0
   Unlocked: 1
   Resource_Time: 1
+  ResourcePrefab: {fileID: 9180563675797976587, guid: b688db54426ade94a98826dc90325801, type: 3}
   currently_adding: 0
   ReM: {fileID: 570290576}
   Inven: {fileID: 594619495}
@@ -956,7 +965,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.35
+  m_fontSize: 62.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

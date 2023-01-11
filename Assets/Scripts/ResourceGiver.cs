@@ -11,6 +11,7 @@ public class ResourceGiver : MonoBehaviour
     [SerializeField] private int cost;
     [SerializeField] private bool Unlocked;
     [SerializeField] private float Resource_Time=1f;
+    [SerializeField] private GameObject ResourcePrefab;
     private bool canGive;
     private int times;
     public bool currently_adding;
@@ -65,6 +66,7 @@ public class ResourceGiver : MonoBehaviour
                 if(Inven.Inv[i]=="Nothing")
                {
                    Inven.Inv[i] = Resource;
+                   Inven.InvContent[i] = ResourcePrefab;
                    ReM.Resources[Resource_Number] += 1;
                     break;
                }
@@ -84,6 +86,7 @@ public class ResourceGiver : MonoBehaviour
                     {
                         times++;
                         Inven.Inv[i] = "Nothing";
+                        Inven.InvContent[i] = null;
                         ReM.Resources[Resource_Number]-=1;
                     }
                 }    
