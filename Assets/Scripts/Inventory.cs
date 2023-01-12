@@ -6,8 +6,10 @@ using TMPro;
 public class Inventory : MonoBehaviour
 {
 [SerializeField] private TextMeshProUGUI Text;
+[SerializeField] private Transform dropPoint;
 public int selectedSlot;
 public string[] Inv;
+public GameObject[] possibleItems;
 public GameObject[] InvContent;
 
     void Update()
@@ -47,9 +49,9 @@ public GameObject[] InvContent;
         {
             if(Input.GetKeyDown(KeyCode.Backspace))
             {
+       Instantiate(InvContent[selectedSlot], dropPoint.position, dropPoint.rotation);
                 Inv[selectedSlot] = "Nothing";
        InvContent[selectedSlot] = null;
-        //spawn pick up item
             }
             if(Input.GetKeyDown(KeyCode.Space))
             {
