@@ -145,6 +145,8 @@ MonoBehaviour:
   Resource_Time: 2
   ResourcePrefab: {fileID: 5951397684372438148, guid: 5d918c8b50ca711418f936fe7d5d0afe, type: 3}
   dropPoint: {fileID: 2594223906836347919}
+  player: {fileID: 0}
+  ResourceType: Wood
   currently_adding: 0
 --- !u!58 &2594223907031165426
 CircleCollider2D:

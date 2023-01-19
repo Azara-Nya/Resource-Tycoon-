@@ -9,6 +9,8 @@ public class ResourceGiver : MonoBehaviour
     [SerializeField] private float Resource_Time=1f;
     [SerializeField] private GameObject ResourcePrefab;
     [SerializeField] private Transform dropPoint;
+    [SerializeField] private Player player;
+    [SerializeField] private string ResourceType="Wood";
     private bool canGive;
     public bool currently_adding;
     private int times;
@@ -38,6 +40,7 @@ public class ResourceGiver : MonoBehaviour
         if(other.CompareTag("Player"))
         {          
         canGive = true;
+        player.currentResourceInRange=ResourceType;
         }
     }
 
@@ -47,6 +50,8 @@ public class ResourceGiver : MonoBehaviour
         {          
             canGive = false;
             currently_adding = false;
+            player.ResourceSpeed=0f;
+            player.currentResourceInRange=null;
         }
     }
 
@@ -62,7 +67,7 @@ public class ResourceGiver : MonoBehaviour
     {    
         {  
             currently_adding = !currently_adding;
-        yield return new WaitForSeconds(Resource_Time);
+        yield return new WaitForSeconds((Resource_Time - player.ResourceSpeed));
 
         if(canGive)
         {

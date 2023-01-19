@@ -5,8 +5,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
- [SerializeField] private float moveSpeed=5f;
  [SerializeField] private Rigidbody2D rb;
+ [SerializeField] private float moveSpeed=5f;
+ public float ResourceSpeed;
+ public string currentResourceInRange;
  Vector2 movement;
 
     void Update()
