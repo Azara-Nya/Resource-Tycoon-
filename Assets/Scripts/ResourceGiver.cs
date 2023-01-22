@@ -17,6 +17,11 @@ public class ResourceGiver : MonoBehaviour
     private int uses;
 
 
+void Start()
+    {
+        player = FindObjectOfType<Player>();
+    }
+
     void Update()
     {
         if(uses < Charges)
